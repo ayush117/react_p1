@@ -1,15 +1,21 @@
-import React from 'react'
-import First from '../components/First.jsx'
+import {React, useEffect ,useState} from 'react'
 import Second from '../components/Second'
-import Third from '../components/Third'
+import axios from 'axios'
 
 const Home = () => {
+    const [count, setCount] = useState('');
+    
+    useEffect(() => {
+        axios.get(`https://mysterious-ridge-76787.herokuapp.com/todos`)
+            .then(response => {
+                setCount(response.data);
+            })
+    });
+
     return (
-        <div>
-            <First/>
-            <Second/>
-            <Third/>
-        </div>
+        <>
+            <Second count={[count]}/>
+        </>
     )
 }
 
